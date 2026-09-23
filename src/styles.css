@@ -83,10 +83,15 @@ h1 {
 
 .metrics {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 14px;
   margin-bottom: 18px;
 }
+
+.metric strong { color: #176b87; }
+.metric-warn strong { color: #c87f1c; }
+.metric-ok strong { color: #14724f; }
+.metric-price strong { font-size: 24px; }
 
 .metric {
   background: #fff;
@@ -255,6 +260,208 @@ textarea {
   .app { padding: 18px; }
   .topbar, .workspace { grid-template-columns: 1fr; }
   .stack { justify-content: flex-start; }
-  .metrics { grid-template-columns: 1fr; }
+  .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .metric-price { grid-column: 1 / -1; }
   .details { grid-template-columns: 1fr; }
+}
+
+/* ---- 计量温度补偿：档案、补偿明细、版本与均价 ---- */
+
+.catalog {
+  margin-bottom: 18px;
+}
+
+.catalog-head {
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.catalog-head h2 {
+  margin: 0;
+  font-size: 20px;
+  white-space: nowrap;
+}
+
+.catalog-head p {
+  flex: 1 1 320px;
+  margin: 0;
+  color: #5b667a;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.catalog-row {
+  border: 1px solid #dfe7f1;
+  border-radius: 8px;
+  padding: 12px;
+  display: grid;
+  gap: 8px;
+  background: #fbfcfe;
+}
+
+.catalog-row strong { color: #176b87; }
+.catalog-row label { font-size: 12px; }
+.catalog-row input[readonly] { background: #f0f3f8; color: #69758c; }
+
+.preview {
+  border: 1px solid #bcd9e2;
+  background: #f1f8fa;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.preview.invalid {
+  border-color: #e5b25c;
+  background: #fdf6ea;
+}
+
+.preview h3 {
+  margin: 0 0 8px;
+  font-size: 14px;
+}
+
+.formula {
+  margin: 0 0 8px;
+  font-size: 13px;
+  color: #445069;
+  line-height: 1.6;
+  word-break: break-word;
+}
+
+.preview-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4px;
+  font-size: 13px;
+  color: #536078;
+}
+
+.preview-grid strong { color: #172033; }
+
+.preview-empty {
+  color: #69758c;
+  font-size: 13px;
+}
+
+.violations {
+  margin: 8px 0 0;
+  padding-left: 18px;
+  color: #a36012;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.form-error {
+  margin: 0;
+  color: #c84b31;
+  font-size: 13px;
+}
+
+.status.ok { background: #e8f4ef; color: #14724f; }
+.status.pending { background: #eaf1fb; color: #2b5d9e; }
+.status.warn { background: #fdf0dd; color: #a36012; }
+.status.old { background: #edeff3; color: #6b7488; }
+.status.sm { padding: 3px 8px; }
+
+.version-tag {
+  font-size: 12px;
+  font-weight: 600;
+  color: #69758c;
+  background: #eef2f7;
+  border-radius: 999px;
+  padding: 2px 8px;
+  margin-left: 6px;
+}
+
+.settled { color: #14724f; font-weight: 700; }
+.unsettled { color: #a36012; }
+
+.review-row {
+  display: flex;
+  gap: 10px;
+  align-items: end;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.reviewer {
+  flex: 1 1 140px;
+  font-size: 13px;
+}
+
+.history {
+  margin-top: 10px;
+  border-top: 1px dashed #cfd8e5;
+  padding-top: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.history-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  font-size: 12.5px;
+  color: #536078;
+  background: #f6f8fb;
+  border-radius: 6px;
+  padding: 8px 10px;
+}
+
+.averages {
+  margin-top: 18px;
+}
+
+.averages h3 {
+  margin: 0 0 10px;
+  font-size: 15px;
+}
+
+.averages table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+
+.averages th,
+.averages td {
+  border: 1px solid #e0e6ef;
+  padding: 8px 10px;
+  text-align: right;
+}
+
+.averages th:first-child,
+.averages td:first-child {
+  text-align: left;
+}
+
+.averages thead th {
+  background: #f1f5fa;
+  color: #445069;
+  font-weight: 700;
+}
+
+.averages tr.total td {
+  background: #eef5fb;
+  font-weight: 800;
+  color: #176b87;
+}
+
+.bar-fill.pending { background: linear-gradient(90deg, #2b5d9e, #7fb0e0); }
+.bar-fill.warn { background: linear-gradient(90deg, #c87f1c, #e8c078); }
+.bar-fill.ok { background: linear-gradient(90deg, #14724f, #6fc39b); }
+.bar-fill.old { background: linear-gradient(90deg, #8a93a5, #c2c8d2); }
+
+@media (max-width: 1100px) {
+  .metrics { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
